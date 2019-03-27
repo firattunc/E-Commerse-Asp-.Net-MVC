@@ -1,0 +1,552 @@
+﻿@using E_Commerse.ViewModels.Home;
+@model HomePageModel
+@{
+    Layout = null;
+}
+
+
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Foxtar | About</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Normalize CSS -->
+    <link href="~/Content/css/normalize.css" rel="stylesheet" />
+
+    <!-- Main CSS -->
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animate CSS -->
+    <link href="~/Content/css/animate.min.css" rel="stylesheet" />
+
+    <!-- Font-awesome CSS-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- Owl Caousel CSS -->
+    <link href="~/Scripts/vendor/OwlCarousel/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/vendor/OwlCarousel/owl.theme.default.min.css" rel="stylesheet" />
+
+    <!-- Main Menu CSS -->
+    <link href="~/Content/css/meanmenu.min.css" rel="stylesheet" />
+
+    <!-- Datetime Picker Style CSS -->
+    <link href="~/Content/css/jquery.datetimepicker.css" rel="stylesheet" />
+
+    <!-- ReImageGrid CSS -->
+    <link href="~/Content/css/reImageGrid.css" rel="stylesheet" />
+
+    <!-- Switch Style CSS -->
+    <link href="~/Content/css/hover-min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="~/Content/css/style.css" type="text/css" rel="stylesheet" />
+
+    <!-- Modernizr Js -->
+    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+    <style>
+        .inner-banner-area {
+            background-image: url("/Content/img/main-banner2.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #preloader {
+            background: #ffffff url('/Content/img/preloader.gif') no-repeat scroll center center;
+            height: 100%;
+            left: 0;
+            overflow: visible;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 9999999;
+
+        }
+        .sidebar-categories-list li:before {
+            display: none;
+        }
+
+        .user-account-info ul li:before {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <!-- Preloader Start Here -->
+    <div id="preloader"></div>
+    <!-- Preloader End Here -->
+    <!-- Main Body Area Start Here -->
+    <div id="wrapper">
+        <!-- Header Area Start Here -->
+        <header>
+            <div id="header2" class="header2-area">
+                <div class="header-top-bar">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-3 hidden-xs">
+                                <div class="logo-area">
+                                    <a href="index.htm"><img class="img-responsive" src="" alt="logo"></a>
+                                </div>
+                            </div>
+                            @if (Convert.ToInt32(Session["loginDurum"]) == 0)
+                            {
+                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                    <ul class="profile-notification">
+                                        <li>
+                                            <div class="cart-area">
+                                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
+                                                <ul>
+                                                    <li>
+                                                        <div class="cart-single-product">
+                                                            <div class="media">
+                                                                <div class="pull-left cart-product-img">
+                                                                    <a href="#">
+                                                                        <img class="img-responsive" alt="product" src="img\product\more2.jpg">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body cart-content">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <h1><a href="#">Product Title Here</a></h1>
+                                                                            <h2><span>Code:</span> STPT600</h2>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>X 1</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>49 ₺</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="cart-single-product">
+                                                            <div class="media">
+                                                                <div class="pull-left cart-product-img">
+                                                                    <a href="#">
+                                                                        <img class="img-responsive" alt="product" src="img\product\more3.jpg">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body cart-content">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <h1><a href="#">Product Title Here</a></h1>
+                                                                            <h2><span>Code:</span> STPT460</h2>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>X 1</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>75 ₺</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <table class="table table-bordered sub-total-area">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Total</td>
+                                                                    <td>124 ₺</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </li>
+                                                    <li>
+                                                        <ul class="cart-checkout-btn" style="margin-left:245px;">
+                                                            <li><a href="cart.htm" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="apply-btn-area">
+                                                <a class="apply-now-btn" href="#" id="login-button">Login</a>
+                                                <div class="login-form" id="login-form" style="display: none;">
+                                                    <h2>Login</h2>
+
+                                                    @using (Html.BeginForm())
+                                                    {
+                                                        <input name="eposta" class="form-control" type="text" placeholder="Name">
+                                                        <input name="sifre" class="form-control" type="password" placeholder="Password">
+                                                        <button class="btn-login" type="submit" value="Login">Login</button>
+                                                        <a class="btn-login" href="/Home/Register">Registration</a>
+                                                        <div class="remember-lost">
+                                                            <div class="checkbox">
+                                                                <label><input type="checkbox"> Remember me</label>
+                                                            </div>
+                                                            <a class="lost-password" href="#">Lost Your Password?</a>
+                                                        </div>
+                                                        <button class="cross-btn form-cancel" type="submit" value=""><i class="fa fa-times" aria-hidden="true"></i></button>
+
+
+
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li><a class="apply-now-btn-color hidden-on-mobile" href="/Home/Register">Register</a></li>
+                                    </ul>
+                                </div>
+                            }
+                            @if (Convert.ToInt32(Session["loginDurum"]) == 1)
+                            {
+                                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
+                                    <ul class="profile-notification">
+
+                                        <li>
+                                            <div class="cart-area">
+                                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
+                                                <ul>
+                                                    <li>
+                                                        <div class="cart-single-product">
+                                                            <div class="media">
+                                                                <div class="pull-left cart-product-img">
+                                                                    <a href="#">
+                                                                        <img class="img-responsive" alt="product" src="img\product\more2.jpg">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body cart-content">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <h1><a href="#">Product Title Here</a></h1>
+                                                                            <h2><span>Code:</span> STPT600</h2>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>X 1</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>49 ₺</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="cart-single-product">
+                                                            <div class="media">
+                                                                <div class="pull-left cart-product-img">
+                                                                    <a href="#">
+                                                                        <img class="img-responsive" alt="product" src="img\product\more3.jpg">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body cart-content">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <h1><a href="#">Product Title Here</a></h1>
+                                                                            <h2><span>Code:</span> STPT460</h2>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>X 1</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>75 ₺</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <table class="table table-bordered sub-total-area">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Total</td>
+                                                                    <td>124 ₺</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </li>
+                                                    <li>
+                                                        <ul class="cart-checkout-btn" style="margin-left:245px;">
+                                                            <li><a href="#" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <!--CHANGE WHEN LOG İN-->
+                                        <li>
+                                            <div class="user-account-info">
+                                                <div class="user-account-info-controler">
+                                                    <div class="user-account-img">
+                                                        <img class="img-responsive" src="~/Content/img/profile/4.png" alt="profile">
+                                                    </div>
+                                                    <div class="user-account-title">
+                                                        <div class="user-account-name">@Session["kullaniciAd"] @Session["kullaniciSoyAd"]</div>
+                                                    </div>
+                                                    <div class="user-account-dropdown">
+                                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                                <ul>
+
+                                                    <li>@Html.ActionLink("My Profile", "ProfilePage", "Profile")</li>
+                                                    <li><a href="#"><i class="fas fa-angle-right" style="margin-right:10px;"></i>Account Setting</a></li>
+
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        @using (Html.BeginForm())
+                                        {
+                                            <li><button class="apply-now-btn" href="#" id="logout-button" type="submit">Logout</button></li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="main-menu-area bg-primaryText" id="sticker">
+                    <div class="container">
+                        <nav id="desktop-nav">
+                            <ul>
+                                <li class="active">
+                                    @Html.ActionLink("Home", "Index", "Home")
+                                </li>
+                                @foreach (var kategori in Model.kategoriler)
+                                {
+                                    <li>
+                                        @Html.ActionLink(kategori.kategoriAd, "ProductGridKategori", "Product", new { kategoriID = kategori.kategoriID }, new { })
+                                    </li>
+
+                                }
+
+
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                <li>@Html.ActionLink("Help", "Help", "Home")</li>
+
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Area Start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul>
+                                        <li class="active">
+                                            <a href="#">Home</a>
+                                            <ul>
+                                                <li><a href="index.htm">Home 1</a></li>
+                                                <li><a href="index2.htm">Home 2</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about.htm">About</a></li>
+                                        <li>
+                                            <a href="#">Pages</a>
+                                            <ul class="mega-menu-area">
+                                                <li>
+                                                    <a href="index.htm">Home 1</a>
+                                                    <a href="index2.htm">Home 2</a>
+                                                    <a href="about.htm">About</a>
+                                                    <a href="product-page-grid.htm">Product Grid</a>
+                                                </li>
+                                                <li>
+                                                    <a href="product-page-list.htm">Product List</a>
+                                                    <a href="product-category-grid.htm">Category Grid</a>
+                                                    <a href="product-category-list.htm">Category List</a>
+                                                    <a href="single-product.htm">Product Details</a>
+                                                </li>
+                                                <li>
+                                                    <a href="profile.htm">Profile</a>
+                                                    <a href="favourites-grid.htm">Favourites Grid</a>
+                                                    <a href="favourites-list.htm">Favourites List</a>
+                                                    <a href="settings.htm">Settings</a>
+                                                </li>
+                                                <li>
+                                                    <a href="upload-products.htm">Upload Products</a>
+                                                    <a href="sales-statement.htm">Sales Statement</a>
+                                                    <a href="withdrawals.htm">Withdrawals</a>
+                                                    <a href="404.htm">404</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="product-page-grid.htm">Clothing</a></li>
+                                        <li><a href="product-category-grid.htm">Electronic</a></li>
+                                        <li><a href="product-category-list.htm">Office</a></li>
+                                        <li><a href="product-page-list.htm">Sport</a></li>
+                                        <li><a href="product-category-grid.htm">Cosmetic</a></li>
+                                        <li>
+                                            <a href="#">Blog</a>
+                                            <ul>
+                                                <li><a href="blog.htm">Blog</a></li>
+                                                <li><a href="single-blog.htm">Blog Details</a></li>
+                                                <li class="has-child-menu">
+                                                    <a href="#">Second Level</a>
+                                                    <ul class="thired-level">
+                                                        <li><a href="index.htm">Thired Level 1</a></li>
+                                                        <li><a href="index.htm">Thired Level 2</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.htm">Contact</a></li>
+                                        <li><a href="help.htm">Help</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Area End -->
+        </header>
+
+        <!-- Main Banner 1 Area End Here -->
+        <!-- Inner Page Banner Area Start Here -->
+        <div class="pagination-area bg-secondary">
+            <div class="container">
+                <div class="pagination-wrapper">
+                    <ul>
+                        <li><a href="index.htm">Home</a><span> -</span></li>
+                        <li>About US</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Inner Page Banner Area End Here -->
+        <!-- About Page Start Here -->
+        <div class="about-page-area bg-secondary section-space-bottom">
+            <div class="container">
+                <h2 class="title-section">To Know Who We Are</h2>
+                <div class="inner-page-details inner-page-padding">
+                    <h3>What We Do</h3>
+                    <p>Scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel placerat suscipit, orci nisl iaculis eros, a tincidunt nisi odio eget lorem nulla condimentum tempor mattis ut vitae feugiat augue.</p>
+
+                    <h3>Our Mission</h3>
+                    <p>Laoreet ac, aliquam sit amet justo nunc tempor, metus vel placerat suscipit, orci nisl iaculis eros, a tincidunt nisi odio eget lorem nulla condimentum tempor mattis ut vitae feugiat augue cras ut metus a risus iaculis scelerisque eu ac ante fusce non varius purus aenean nec magna felis fusce vestibulum.</p>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- About Page End Here -->
+        <!-- Footer Area Start Here -->
+        <footer>
+            <div class="footer-area-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="footer-box">
+                                <h3 class="title-bar-left title-bar-footer">Our Address</h3>
+                                <ul class="corporate-address">
+                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i><a href="Phone(01)800433633">Turgutlu/Manisa , Turkey</a></li>
+                                    <li><i class="fa fa-phone" aria-hidden="true"></i>+90 05322222222</li>
+                                    <li><i class="fa fa-fax" aria-hidden="true"></i>+90-212-3102416</li>
+                                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i>firat_yzm17@outlook.com</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="footer-box">
+                                <h3 class="title-bar-left title-bar-footer">Need Help?</h3>
+                                <ul class="featured-links">
+                                    <li>
+                                        <ul>
+                                            <li>@Html.ActionLink("Help", "Help", "Home")</li>
+
+                                            <li>@Html.ActionLink("Contact Us", "Contact", "Home")</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="footer-box">
+                                <h3 class="title-bar-left title-bar-footer">Follow Us On</h3>
+                                <ul class="footer-social">
+                                    <li><a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-area-bottom">
+                <div class="container">
+                    <p>2019 market place E-Commerse Application. Made by Asp.NET MVC.</p>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Area End Here -->
+    </div>
+    <!-- Main Body Area End Here -->
+    <!-- jquery-->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+
+    <!-- Plugins js -->
+    <script src="~/Scripts/plugins.js"></script>
+
+    <!-- Bootstrap js -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- WOW JS -->
+    <script src="~/Scripts/wow.min.js"></script>
+
+    <!-- Owl Cauosel JS -->
+    <script src="~/Scripts/vendor/OwlCarousel/owl.carousel.min.js"></script>
+
+    <!-- Meanmenu Js -->
+    <script src="~/Scripts/jquery.meanmenu.min.js"></script>
+
+    <!-- Srollup js -->
+    <script src="~/Scripts/jquery.scrollUp.min.js"></script>
+
+    <!-- jquery.counterup js -->
+    <script src="~/Scripts/jquery.counterup.min.js"></script>
+    <script src="~/Scripts/waypoints.min.js"></script>
+
+    <!-- Isotope js -->
+    <script src="~/Scripts/isotope.pkgd.min.js"></script>
+
+    <!-- Gridrotator js -->
+    <script src="~/Scripts/jquery.gridrotator.js"></script>
+
+    <!-- Custom Js -->
+    <script src="~/Scripts/main.js"></script>
+
+</body>
+</html>
