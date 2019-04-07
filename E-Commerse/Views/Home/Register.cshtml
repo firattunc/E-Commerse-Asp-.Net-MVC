@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Foxtar | Registration</title>
+    <title>E-Commerse | Registration</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Normalize CSS -->
@@ -60,7 +60,7 @@
     <div id="modalNesne" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content" style="margin-top:350px;">
-                <p style="text-align:center">Bu epostayla kayıtlı kullanıcı bulunmaktadır.</p>
+                <p style="text-align:center">Bu ID'yle kayıtlı kullanıcı bulunmaktadır.</p>
             </div>
         </div>
     </div>
@@ -86,95 +86,97 @@
                 <div class="header-top-bar">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-3 hidden-xs">
+                            <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
                                 <div class="logo-area">
-                                    <a href="index.htm"><img class="img-responsive" src="img\logo.png" alt="logo"></a>
+                                    <a href="index.htm">
+                                        <img src="logo.png" />logo
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col-lg-10 col-md-10 col-sm-9 col-sm-12">
 
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <ul class="profile-notification">
+                                    <!--SEPET -->
+                                    <li>
+                                        <div class="cart-area">
+                                            @if (Convert.ToInt32(Session["loginDurum"]) == 1)
+                                            {
+                                                <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>@Convert.ToInt32(Session["sepetAdetKullanici"])</span></a>
+                                            }
+                                            else
+                                            {
+                                                <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>@Convert.ToInt32(Session["sepetAdetZiyaretci"])</span></a>
+                                            }
 
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <ul class="profile-notification">
-                                        <li>
-                                            <div class="cart-area">
-                                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
-                                                <ul>
+                                            <ul>
+
+                                                @{
+                                                    decimal total = 0;
+                                                    decimal indirimliFiyatSepet = 0;
+
+                                                }
+                                                @foreach (var item in Model.sepet)
+                                                {
+                                                    indirimliFiyatSepet = Decimal.Round(item.urunID.urunFiyat - (item.urunID.urunFiyat * (Convert.ToDecimal(item.urunID.indirimYuzde) / 100)), 2);
+                                                    total += indirimliFiyatSepet * item.urunAdet;
+
                                                     <li>
                                                         <div class="cart-single-product">
                                                             <div class="media">
                                                                 <div class="pull-left cart-product-img">
                                                                     <a href="#">
-                                                                        <img class="img-responsive" alt="product" src="img\product\more2.jpg">
+                                                                        <img class="img-responsive" alt="product" src="@item.urunID.imageUrl">
                                                                     </a>
                                                                 </div>
                                                                 <div class="media-body cart-content">
                                                                     <ul>
                                                                         <li>
-                                                                            <h1><a href="#">Product Title Here</a></h1>
-                                                                            <h2><span>Code:</span> STPT600</h2>
+                                                                            <h1><a href="#">@item.urunID.urunAd</a></h1>
+                                                                            <h2><span>Code:</span> STPT - @item.urunID.urunID </h2>
                                                                         </li>
                                                                         <li>
-                                                                            <p>X 1</p>
+                                                                            <p>X @item.urunAdet </p>
                                                                         </li>
                                                                         <li>
-                                                                            <p>49 ₺</p>
+                                                                            <p>@indirimliFiyatSepet</p>
                                                                         </li>
                                                                         <li>
-                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
+                                                                            @using (Html.BeginForm())
+                                                                            {
+                                                                                <button class="trash" name="btnSil" value="@item.urunID.urunID"><i class="fa fa-trash"></i></button>
+                                                                            }
+
+                                                                            <a href="#"></a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li>
-                                                        <div class="cart-single-product">
-                                                            <div class="media">
-                                                                <div class="pull-left cart-product-img">
-                                                                    <a href="#">
-                                                                        <img class="img-responsive" alt="product" src="img\product\more3.jpg">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body cart-content">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <h1><a href="#">Product Title Here</a></h1>
-                                                                            <h2><span>Code:</span> STPT460</h2>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>X 1</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>75 ₺</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <table class="table table-bordered sub-total-area">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Total</td>
-                                                                    <td>124 ₺</td>
-                                                                </tr>
+                                                }
 
-                                                            </tbody>
-                                                        </table>
-                                                    </li>
-                                                    <li>
-                                                        <ul class="cart-checkout-btn" style="margin-left:245px;">
-                                                            <li><a href="cart.htm" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                                <li>
+                                                    <table class="table table-bordered sub-total-area">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Total</td>
+                                                                <td>@total</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </li>
+                                                <li>
+                                                    <ul class="cart-checkout-btn" style="margin-left:245px;">
+                                                        <li><a href="/Home/Cart" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    @if (Convert.ToInt32(Session["loginDurum"]) == 0)
+                                    {
+
                                         <li>
                                             <div class="apply-btn-area">
                                                 <a class="apply-now-btn" href="#" id="login-button">Login</a>
@@ -183,10 +185,10 @@
 
                                                     @using (Html.BeginForm())
                                                     {
-                                                        <input name="eposta" class="form-control" type="text" placeholder="Name">
-                                                        <input name="sifre" class="form-control" type="password" placeholder="Password">
-                                                        <button class="btn-login" type="submit" value="Login" name="btnLogin">Login</button>
-                                                        <a class="btn-login" href="/Home/Register">Registration</a>
+                                                        <input data-error="Email field is required" required="" name="eposta" class="form-control" type="text" placeholder="Name">
+                                                        <input data-error="Email field is required" required="" name="sifre" class="form-control" type="password" placeholder="Password">
+                                                        <button class="btn-login" type="submit" value="isLogin" name="btnLogin">Login</button>
+                                                        <a class="btn-login" href="/Home/Register" value="isbtnRegister">Registration</a>
                                                         <div class="remember-lost">
                                                             <div class="checkbox">
                                                                 <label><input type="checkbox"> Remember me</label>
@@ -195,17 +197,50 @@
                                                         </div>
                                                         <button class="cross-btn form-cancel" type="submit" value=""><i class="fa fa-times" aria-hidden="true"></i></button>
 
-
-
                                                     }
 
                                                 </div>
                                             </div>
                                         </li>
                                         <li><a class="apply-now-btn-color hidden-on-mobile" href="/Home/Register">Register</a></li>
-                                    </ul>
-                                </div>
+
+                                    }
+                                    @if (Convert.ToInt32(Session["loginDurum"]) == 1)
+                                    {
+                                        <!--CHANGE WHEN LOG İN-->
+                                        <li>
+                                            <div class="user-account-info">
+                                                <div class="user-account-info-controler">
+                                                    <div class="user-account-img">
+                                                        <img class="img-responsive" src="~/Content/img/profile/4.png" alt="profile">
+                                                    </div>
+                                                    <div class="user-account-title">
+                                                        <div class="user-account-name">@Session["kullaniciAd"] @Session["kullaniciSoyAd"]</div>
+                                                    </div>
+                                                    <div class="user-account-dropdown">
+                                                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                                <ul>
+
+                                                    <li>@Html.ActionLink("My Profile", "ProfilePage", "Profile")</li>
+                                                    <li><a href="/Profile/AccountSetting">Account Setting</a></li>
+
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        using (Html.BeginForm())
+                                        {
+                                            <li><button class="apply-now-btn" href="#" id="logout-button" type="submit" value="isLogin" name="btnLogout">Logout</button></li>
+                                        }
+
+
+                                    }
+
+                                </ul>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -334,27 +369,27 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label" for="firstname">First Name *</label>
-                                    <input type="text" name="firstname" class="form-control">
+                                    <input data-error="Email field is required" required="" type="text" name="firstname" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label" for="lastname">Last Name *</label>
-                                    <input type="text" name="lastname" class="form-control">
+                                    <input data-error="Email field is required" required="" type="text" name="lastname" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label" for="email">E-mail Address *</label>
-                                    <input maxlength="40" type="text" name="email" class="form-control">
+                                    <label class="control-label" for="email">ID *</label>
+                                    <input data-error="Email field is required" required="" maxlength="40" type="text" name="email" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label" for="password">Password *</label>
-                                    <input maxlength="20" id="password-field" type="password" class="form-control" name="password" value="">
+                                    <input data-error="Email field is required" required="" maxlength="20" id="password-field" type="password" class="form-control" name="password" value="">
                                     <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                                 </div>
                             </div>
@@ -363,9 +398,9 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label">address *</label>
-                                    <input type="text" name="address" class="form-control">
+                                    <input data-error="Email field is required" required="" type="text" name="address" class="form-control">
                                     <label class="control-label">country *</label>
-                                    <input maxlength="30" type="text" name="country" class="form-control">
+                                    <input data-error="Email field is required" required="" maxlength="30" type="text" name="country" class="form-control">
                                 </div>
                             </div>
                         </div>

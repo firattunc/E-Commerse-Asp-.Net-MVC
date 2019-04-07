@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Foxtar | About</title>
+    <title>E-Commerse | About</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -94,94 +94,97 @@
                 <div class="header-top-bar">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-3 hidden-xs">
+                            <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
                                 <div class="logo-area">
-                                    <a href="index.htm"><img class="img-responsive" src="" alt="logo"></a>
+                                    <a href="index.htm">
+                                        <img src="logo.png" />logo
+                                    </a>
                                 </div>
                             </div>
-                            @if (Convert.ToInt32(Session["loginDurum"]) == 0)
-                            {
-                                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                    <ul class="profile-notification">
-                                        <li>
-                                            <div class="cart-area">
-                                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
-                                                <ul>
-                                                    <li>
-                                                        <div class="cart-single-product">
-                                                            <div class="media">
-                                                                <div class="pull-left cart-product-img">
-                                                                    <a href="#">
-                                                                        <img class="img-responsive" alt="product" src="img\product\more2.jpg">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body cart-content">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <h1><a href="#">Product Title Here</a></h1>
-                                                                            <h2><span>Code:</span> STPT600</h2>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>X 1</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>49 ₺</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cart-single-product">
-                                                            <div class="media">
-                                                                <div class="pull-left cart-product-img">
-                                                                    <a href="#">
-                                                                        <img class="img-responsive" alt="product" src="img\product\more3.jpg">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body cart-content">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <h1><a href="#">Product Title Here</a></h1>
-                                                                            <h2><span>Code:</span> STPT460</h2>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>X 1</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>75 ₺</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <table class="table table-bordered sub-total-area">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Total</td>
-                                                                    <td>124 ₺</td>
-                                                                </tr>
 
-                                                            </tbody>
-                                                        </table>
-                                                    </li>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                <ul class="profile-notification">
+                                    <!--SEPET -->
+                                    <li>
+                                        <div class="cart-area">
+                                            @if (Convert.ToInt32(Session["loginDurum"]) == 1)
+                                            {
+                                                <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>@Convert.ToInt32(Session["sepetAdetKullanici"])</span></a>
+                                            }
+                                            else
+                                            {
+                                                <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>@Convert.ToInt32(Session["sepetAdetZiyaretci"])</span></a>
+                                            }
+
+                                            <ul>
+
+                                                @{
+                                                    decimal total = 0;
+                                                    decimal indirimliFiyatSepet = 0;
+
+                                                }
+                                                @foreach (var item in Model.sepet)
+                                                {
+                                                    indirimliFiyatSepet = Decimal.Round(item.urunID.urunFiyat - (item.urunID.urunFiyat * (Convert.ToDecimal(item.urunID.indirimYuzde) / 100)), 2);
+                                                    total += indirimliFiyatSepet * item.urunAdet;
+
                                                     <li>
-                                                        <ul class="cart-checkout-btn" style="margin-left:245px;">
-                                                            <li><a href="cart.htm" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
-                                                        </ul>
+                                                        <div class="cart-single-product">
+                                                            <div class="media">
+                                                                <div class="pull-left cart-product-img">
+                                                                    <a href="#">
+                                                                        <img class="img-responsive" alt="product" src="@item.urunID.imageUrl">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body cart-content">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <h1><a href="#">@item.urunID.urunAd</a></h1>
+                                                                            <h2><span>Code:</span> STPT - @item.urunID.urunID </h2>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>X @item.urunAdet </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>@indirimliFiyatSepet</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            @using (Html.BeginForm())
+                                                                            {
+                                                                                <button class="trash" name="btnSil" value="@item.urunID.urunID"><i class="fa fa-trash"></i></button>
+                                                                            }
+
+                                                                            <a href="#"></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                                }
+
+                                                <li>
+                                                    <table class="table table-bordered sub-total-area">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Total</td>
+                                                                <td>@total</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </li>
+                                                <li>
+                                                    <ul class="cart-checkout-btn" style="margin-left:245px;">
+                                                        <li><a href="/Home/Cart" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    @if (Convert.ToInt32(Session["loginDurum"]) == 0)
+                                    {
+
                                         <li>
                                             <div class="apply-btn-area">
                                                 <a class="apply-now-btn" href="#" id="login-button">Login</a>
@@ -192,8 +195,8 @@
                                                     {
                                                         <input name="eposta" class="form-control" type="text" placeholder="Name">
                                                         <input name="sifre" class="form-control" type="password" placeholder="Password">
-                                                        <button class="btn-login" type="submit" value="Login">Login</button>
-                                                        <a class="btn-login" href="/Home/Register">Registration</a>
+                                                        <button class="btn-login" type="submit" value="isLogin" name="btnLogin">Login</button>
+                                                        <a class="btn-login" href="/Home/Register" value="isbtnRegister">Registration</a>
                                                         <div class="remember-lost">
                                                             <div class="checkbox">
                                                                 <label><input type="checkbox"> Remember me</label>
@@ -202,101 +205,16 @@
                                                         </div>
                                                         <button class="cross-btn form-cancel" type="submit" value=""><i class="fa fa-times" aria-hidden="true"></i></button>
 
-
-
                                                     }
 
                                                 </div>
                                             </div>
                                         </li>
                                         <li><a class="apply-now-btn-color hidden-on-mobile" href="/Home/Register">Register</a></li>
-                                    </ul>
-                                </div>
-                            }
-                            @if (Convert.ToInt32(Session["loginDurum"]) == 1)
-                            {
-                                <div class="col-lg-10 col-md-10 col-sm-9 col-xs-12">
-                                    <ul class="profile-notification">
 
-                                        <li>
-                                            <div class="cart-area">
-                                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
-                                                <ul>
-                                                    <li>
-                                                        <div class="cart-single-product">
-                                                            <div class="media">
-                                                                <div class="pull-left cart-product-img">
-                                                                    <a href="#">
-                                                                        <img class="img-responsive" alt="product" src="img\product\more2.jpg">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body cart-content">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <h1><a href="#">Product Title Here</a></h1>
-                                                                            <h2><span>Code:</span> STPT600</h2>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>X 1</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>49 ₺</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cart-single-product">
-                                                            <div class="media">
-                                                                <div class="pull-left cart-product-img">
-                                                                    <a href="#">
-                                                                        <img class="img-responsive" alt="product" src="img\product\more3.jpg">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body cart-content">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <h1><a href="#">Product Title Here</a></h1>
-                                                                            <h2><span>Code:</span> STPT460</h2>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>X 1</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <p>75 ₺</p>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a class="trash" href="#"><i class="fa fa-trash"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <table class="table table-bordered sub-total-area">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Total</td>
-                                                                    <td>124 ₺</td>
-                                                                </tr>
-
-                                                            </tbody>
-                                                        </table>
-                                                    </li>
-                                                    <li>
-                                                        <ul class="cart-checkout-btn" style="margin-left:245px;">
-                                                            <li><a href="#" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                    }
+                                    @if (Convert.ToInt32(Session["loginDurum"]) == 1)
+                                    {
                                         <!--CHANGE WHEN LOG İN-->
                                         <li>
                                             <div class="user-account-info">
@@ -314,18 +232,22 @@
                                                 <ul>
 
                                                     <li>@Html.ActionLink("My Profile", "ProfilePage", "Profile")</li>
-                                                    <li><a href="#"><i class="fas fa-angle-right" style="margin-right:10px;"></i>Account Setting</a></li>
+                                                    <li><a href="/Profile/AccountSetting">Account Setting</a></li>
 
                                                 </ul>
                                             </div>
                                         </li>
-                                        @using (Html.BeginForm())
+                                        using (Html.BeginForm())
                                         {
-                                            <li><button class="apply-now-btn" href="#" id="logout-button" type="submit">Logout</button></li>
+                                            <li><button class="apply-now-btn" href="#" id="logout-button" type="submit" value="isLogin" name="btnLogout">Logout</button></li>
                                         }
-                                    </ul>
-                                </div>
-                            }
+
+
+                                    }
+
+                                </ul>
+                            </div>
+
 
                         </div>
                     </div>

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>E-Commerse</title>
+    <title>E-Commerse | Product Details</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -82,13 +82,12 @@
     
 </head>
 <body>
-    
+
     @{
         string hide = ViewData["hide"].ToString();
         int sepetAdet = Convert.ToInt32(Session["sepetAdet"]);
 
     }
-
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -118,46 +117,68 @@
                                     <!--SEPET -->
                                     <li>
                                         <div class="cart-area">
-                                            <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span> @sepetAdet</span></a>
+                                               @if (Convert.ToInt32(Session["loginDurum"]) == 1)
+                                                {
+                                                <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>@Convert.ToInt32(Session["sepetAdetKullanici"])</span></a>
+                                                }
+                                                else
+                                                {
+                                                <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>@Convert.ToInt32(Session["sepetAdetZiyaretci"])</span></a>
+                                                }
+                                            
                                             <ul>
+
+                                                @{
+                                                    decimal total = 0;
+                                                    decimal indirimliFiyatSepet = 0;
+    
+                                                }
                                                 @foreach (var item in Model.sepet)
                                                 {
-                                                <li>
-                                                    <div class="cart-single-product">
-                                                        <div class="media">
-                                                            <div class="pull-left cart-product-img">
-                                                                <a href="#">
-                                                                    <img class="img-responsive" alt="product" src="@item.urunID.imageUrl">
-                                                                </a>
-                                                            </div>
-                                                            <div class="media-body cart-content">
-                                                                <ul>
-                                                                    <li>
-                                                                        <h1><a href="#">@item.urunID.urunAd</a></h1>
-                                                                        <h2><span>Code:</span> STPT - @item.urunID.urunID </h2>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>X 1</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>@item.urunID.urunFiyat</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="trash" href="#"><i class="fa fa-trash"></i></a>
-                                                                    </li>
-                                                                </ul>
+                                                    indirimliFiyatSepet = Decimal.Round(item.urunID.urunFiyat - (item.urunID.urunFiyat * (Convert.ToDecimal(item.urunID.indirimYuzde) / 100)), 2);
+                                                    total += indirimliFiyatSepet*item.urunAdet;
+
+                                                    <li>
+                                                        <div class="cart-single-product">
+                                                            <div class="media">
+                                                                <div class="pull-left cart-product-img">
+                                                                    <a href="#">
+                                                                        <img class="img-responsive" alt="product" src="@item.urunID.imageUrl">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body cart-content">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <h1><a href="#">@item.urunID.urunAd</a></h1>
+                                                                            <h2><span>Code:</span> STPT - @item.urunID.urunID </h2>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>X @item.urunAdet </p>
+                                                                        </li>
+                                                                        <li>
+                                                                              <p>@indirimliFiyatSepet</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            @using (Html.BeginForm())
+                                                                            {
+                                                                                <button class="trash" name="btnSil" value="@item.urunID.urunID"><i class="fa fa-trash"></i></button>
+                                                                            }
+                                                                          
+                                                                            <a  href="#"></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
                                                 }
-
+                                              
                                                 <li>
                                                     <table class="table table-bordered sub-total-area">
                                                         <tbody>
                                                             <tr>
                                                                 <td>Total</td>
-                                                                <td>124 ₺</td>
+                                                                <td>@total</td>
                                                             </tr>
 
                                                         </tbody>
@@ -165,7 +186,7 @@
                                                 </li>
                                                 <li>
                                                     <ul class="cart-checkout-btn" style="margin-left:245px;">
-                                                        <li><a href="cart.htm" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
+                                                        <li><a href="/Home/Cart" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -182,8 +203,8 @@
 
                                                     @using (Html.BeginForm())
                                                     {
-                                                        <input name="eposta" class="form-control" type="text" placeholder="Name">
-                                                        <input name="sifre" class="form-control" type="password" placeholder="Password">
+                                                        <input data-error="Email field is required" required="" name="eposta" class="form-control" type="text" placeholder="Name">
+                                                        <input data-error="Email field is required" required="" name="sifre" class="form-control" type="password" placeholder="Password">
                                                         <button class="btn-login" type="submit" value="isLogin" name="btnLogin">Login</button>
                                                         <a class="btn-login" href="/Home/Register" value="isbtnRegister">Registration</a>
                                                         <div class="remember-lost">
@@ -221,7 +242,7 @@
                                                 <ul>
 
                                                     <li>@Html.ActionLink("My Profile", "ProfilePage", "Profile")</li>
-                                                    <li><a href="#">Account Setting</a></li>
+                                                    <li><a href="/Profile/AccountSetting">Account Setting</a></li>
 
                                                 </ul>
                                             </div>
@@ -450,15 +471,16 @@
                                         {
                                             if (Model.seciliUrun.urunStok == 0)
                                             {
-                                                <li><h3 style="color:red;text-align:center;font-size:15px;">No Product Available</h3></li>  
-                                                <li><button class="add-to-favourites-btn" id="favourites-button-click"><i class="fa fa-star" aria-hidden="true"></i> Add To Favorites</button></li>
+                                                <li><h3 style="color:red;text-align:center;font-size:15px;">No Product Available</h3></li>
                                             }
                                             else
                                             {
                                                 <li><button class="add-to-cart-btn" name="addCart" id="cart-button"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add To Cart</button></li>
-                                                <li><button class="add-to-favourites-btn" id="favourites-button-click"><i class="fa fa-star" aria-hidden="true"></i> Add To Favorites</button></li>
                                             }
-
+                                            if (Convert.ToInt32(Session["loginDurum"]) == 1)
+                                            {
+                                                <li><button class="add-to-favourites-btn" name="addFavorites" id="favourites-button-click"><i class="fa fa-star" aria-hidden="true"></i> Add To Favorites</button></li>
+                                            }
 
                                         }
                                     </ul>

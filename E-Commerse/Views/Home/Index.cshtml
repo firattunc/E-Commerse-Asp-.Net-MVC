@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Foxtar | Home 2</title>
+    <title>E-Commerse | Home </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -51,11 +51,11 @@
     <script src="~/Scripts/modernizr-2.8.3.min.js">
 
 
-        
 
 
 
-</script>
+
+    </script>
     <style>
         .main-banner2-area {
             background-image: url("/Content/img/main-banner2.jpg");
@@ -74,6 +74,7 @@
             width: 100%;
             z-index: 9999999;
         }
+
         .sidebar-categories-list li:before {
             display: none;
         }
@@ -81,22 +82,54 @@
         .user-account-info ul li:before {
             display: none;
         }
-       
+        .hmdxoi {
+            color: rgb(255, 255, 255);
+            background-color: rgb(58, 160, 58);
+            font-size: 11px;
+            line-height: 16px;
+            font-weight: 600;
+            text-align: center;
+            width: 300px;
+            height: 16px;
+            display: inline-block;
+            text-decoration: none;
+            padding: 0px 7px;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body>
     @{
         int isLoginError = Convert.ToInt32(TempData["alertLogin"]);
         int sepetAdet = Convert.ToInt32(Session["sepetAdet"]);
+        string duyuru = Model.admin.duyuru;
+        int duyuruGoster = Convert.ToInt32(Session["duyuruGoster"]);
+
     }
-    <!--MODAL LOGİN HATASI-->
-    <div id="modalNesne" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content" style="margin-top:350px;">
-                <p style="text-align:center">Böyle Bir Kullanıcı Bulunumadı.</p>
+    @if (duyuruGoster == 1)
+    {
+
+        <div id="modalNesne" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Notification</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <img src="" class="img-responsive">
+                        </div>
+                        <p>@duyuru</p>
+
+                    </div>
+
+
+                </div>
             </div>
         </div>
-    </div>
+
+    }
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -119,76 +152,74 @@
                                     </a>
                                 </div>
                             </div>
-                            
+
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <ul class="profile-notification">
                                     <!--SEPET -->
                                     <li>
                                         <div class="cart-area">
-                                            <a ><i class="fa fa-shopping-cart" aria-hidden="true"></i><span> @sepetAdet</span></a>
+                                            @if (Convert.ToInt32(Session["loginDurum"]) == 1)
+                                            {
+                                                <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>@Convert.ToInt32(Session["sepetAdetKullanici"])</span></a>
+                                            }
+                                            else
+                                            {
+                                                <a><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>@Convert.ToInt32(Session["sepetAdetZiyaretci"])</span></a>
+                                            }
+
                                             <ul>
-                                                <li>
-                                                    <div class="cart-single-product">
-                                                        <div class="media">
-                                                            <div class="pull-left cart-product-img">
-                                                                <a href="#">
-                                                                    <img class="img-responsive" alt="product" src="img\product\more2.jpg">
-                                                                </a>
-                                                            </div>
-                                                            <div class="media-body cart-content">
-                                                                <ul>
-                                                                    <li>
-                                                                        <h1><a href="#">Product Title Here</a></h1>
-                                                                        <h2><span>Code:</span> STPT600</h2>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>X 1</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>49 ₺</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="trash" href="#"><i class="fa fa-trash"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="cart-single-product">
-                                                        <div class="media">
-                                                            <div class="pull-left cart-product-img">
-                                                                <a href="#">
-                                                                    <img class="img-responsive" alt="product" src="img\product\more3.jpg">
-                                                                </a>
-                                                            </div>
-                                                            <div class="media-body cart-content">
-                                                                <ul>
-                                                                    <li>
-                                                                        <h1><a href="#">Product Title Here</a></h1>
-                                                                        <h2><span>Code:</span> STPT460</h2>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>X 1</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>75 ₺</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="trash" href="#"><i class="fa fa-trash"></i></a>
-                                                                    </li>
-                                                                </ul>
+
+                                                @{
+                                                    decimal total = 0;
+                                                    decimal indirimliFiyatSepet = 0;
+
+                                                }
+                                                @foreach (var item in Model.sepet)
+                                                {
+                                                    indirimliFiyatSepet = Decimal.Round(item.urunID.urunFiyat - (item.urunID.urunFiyat * (Convert.ToDecimal(item.urunID.indirimYuzde) / 100)), 2);
+                                                    total += indirimliFiyatSepet * item.urunAdet;
+
+                                                    <li>
+                                                        <div class="cart-single-product">
+                                                            <div class="media">
+                                                                <div class="pull-left cart-product-img">
+                                                                    <a href="#">
+                                                                        <img class="img-responsive" alt="product" src="@item.urunID.imageUrl">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="media-body cart-content">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <h1><a href="#">@item.urunID.urunAd</a></h1>
+                                                                            <h2><span>Code:</span> STPT - @item.urunID.urunID </h2>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>X @item.urunAdet </p>
+                                                                        </li>
+                                                                        <li>
+                                                                            <p>@indirimliFiyatSepet</p>
+                                                                        </li>
+                                                                        <li>
+                                                                            @using (Html.BeginForm())
+                                                                            {
+                                                                                <button class="trash" name="btnSil" value="@item.urunID.urunID"><i class="fa fa-trash"></i></button>
+                                                                            }
+
+                                                                            <a href="#"></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
+                                                }
+
                                                 <li>
                                                     <table class="table table-bordered sub-total-area">
                                                         <tbody>
                                                             <tr>
                                                                 <td>Total</td>
-                                                                <td>124 ₺</td>
+                                                                <td>@total</td>
                                                             </tr>
 
                                                         </tbody>
@@ -196,7 +227,7 @@
                                                 </li>
                                                 <li>
                                                     <ul class="cart-checkout-btn" style="margin-left:245px;">
-                                                        <li><a href="cart.htm" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
+                                                        <li><a href="/Home/Cart" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -208,13 +239,13 @@
                                         <li>
                                             <div class="apply-btn-area">
                                                 <a class="apply-now-btn" href="#" id="login-button">Login</a>
-                                                <div class="login-form" id="login-form" style="display: none;">
+                                                <div class="login-form" id="login-form"  style="display: none;">
                                                     <h2>Login</h2>
 
                                                     @using (Html.BeginForm())
                                                     {
-                                                        <input name="eposta" class="form-control" type="text" placeholder="Name">
-                                                        <input name="sifre" class="form-control" type="password" placeholder="Password">
+                                                        <input name="eposta" class="form-control" data-error="Email field is required" required="" type="text" placeholder="Name">
+                                                        <input name="sifre" class="form-control" data-error="Email field is required" required="" type="password" placeholder="Password">
                                                         <button class="btn-login" type="submit" value="isLogin" name="btnLogin">Login</button>
                                                         <a class="btn-login" href="/Home/Register" value="isbtnRegister">Registration</a>
                                                         <div class="remember-lost">
@@ -252,7 +283,7 @@
                                                 <ul>
 
                                                     <li>@Html.ActionLink("My Profile", "ProfilePage", "Profile")</li>
-                                                    <li><a href="#">Account Setting</a></li>
+                                                    <li><a href="/Profile/AccountSetting">Account Setting</a></li>
 
                                                 </ul>
                                             </div>
@@ -267,7 +298,7 @@
 
                                 </ul>
                             </div>
-                            
+
 
                         </div>
                     </div>
@@ -339,7 +370,7 @@
         <div class="main-banner2-area">
             <div class="container">
                 <div class="main-banner2-wrapper">
-                    <h1>Welcome To Market Place! @Session["loginDurum"]</h1>
+                    <h1>Welcome To Market Place!</h1>
                     <p> Many categories of products at your service ... </p>
                 </div>
             </div>
@@ -369,7 +400,7 @@
                     @foreach (var urun in Model.urunler)
                     {
                         i++;
-                        if (i > 20)
+                        if (i > 24)
                         {
                             continue;
                         }
@@ -434,7 +465,13 @@
 
                                                         </div>
                                                     }
-
+                                                    @if (urun.kategoriID.kategoriAd=="Cheapest")
+	                                                {
+                                                        <div class="profile-right hmdxoi ">
+                                                            En Ucuz
+                                                        </div>
+	                                                }   
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -460,180 +497,27 @@
                 </div>
                 <div class="container=fluid">
                     <div class="fox-carousel dot-control-textPrimary" data-loop="true" data-items="4" data-margin="30" data-autoplay="true" data-autoplay-timeout="10000" data-smart-speed="2000" data-dots="false" data-nav="true" data-nav-speed="false" data-r-x-small="1" data-r-x-small-nav="false" data-r-x-small-dots="true" data-r-x-medium="2" data-r-x-medium-nav="false" data-r-x-medium-dots="true" data-r-small="2" data-r-small-nav="false" data-r-small-dots="true" data-r-medium="3" data-r-medium-nav="false" data-r-medium-dots="true" data-r-large="4" data-r-large-nav="false" data-r-large-dots="true">
-                        <div class="single-item-grid">
-                            <div class="item-img">
-                                <img src="img\product\20.jpg" alt="product" class="img-responsive">
-                                <div class="trending-sign" data-tips="Trending"><i class="fa fa-bolt" aria-hidden="true"></i></div>
-                            </div>
-                            <div class="item-content">
-                                <div class="item-info">
-                                    <h3><a href="#">Team Component Pro</a></h3>
-                                    <span>Joomla Component</span>
-                                    <div class="price">$15</div>
+                        @foreach (var item in Model.enUcuzUrunler)
+                        {
+                            <div class="single-item-grid">
+                                <div class="item-img">
+                                    <img src="@item.imageUrl" alt="product" class="img-responsive">
+                                    <div class="trending-sign" data-tips="Trending"><i class="fa fa-bolt" aria-hidden="true"></i></div>
                                 </div>
-                                <div class="item-profile">
-                                    <div class="profile-title">
-                                        <div class="img-wrapper"><img src="img\profile\1.jpg" alt="profile" class="img-responsive img-circle"></div>
-                                        <span>PsdBosS</span>
+                                <div class="item-content">
+                                    <div class="item-info">
+                                        <h3>@Html.ActionLink(item.urunAd, "ProductDetails", "Product", new { urunid = item.urunID }, new {  })</h3>
+                                        <div class="price">@item.urunFiyat</div>
                                     </div>
-                                    <div class="profile-rating">
-                                        <ul>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li>(<span> 05</span> )</li>
-                                        </ul>
+                                    <div class="profile-right hmdxoi ">
+                                        En Ucuz
                                     </div>
                                 </div>
+                                
                             </div>
-                        </div>
-                        <div class="single-item-grid">
-                            <div class="item-img">
-                                <img src="img\product\21.jpg" alt="product" class="img-responsive">
-                                <div class="trending-sign" data-tips="Trending"><i class="fa fa-bolt" aria-hidden="true"></i></div>
-                            </div>
-                            <div class="item-content">
-                                <div class="item-info">
-                                    <h3><a href="#">Team Component Pro</a></h3>
-                                    <span>Joomla Component</span>
-                                    <div class="price">$15</div>
-                                </div>
-                                <div class="item-profile">
-                                    <div class="profile-title">
-                                        <div class="img-wrapper"><img src="img\profile\1.jpg" alt="profile" class="img-responsive img-circle"></div>
-                                        <span>PsdBosS</span>
-                                    </div>
-                                    <div class="profile-rating">
-                                        <ul>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li>(<span> 05</span> )</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-item-grid">
-                            <div class="item-img">
-                                <img src="img\product\22.jpg" alt="product" class="img-responsive">
-                                <div class="trending-sign" data-tips="Trending"><i class="fa fa-bolt" aria-hidden="true"></i></div>
-                            </div>
-                            <div class="item-content">
-                                <div class="item-info">
-                                    <h3><a href="#">Team Component Pro</a></h3>
-                                    <span>Joomla Component</span>
-                                    <div class="price">$15</div>
-                                </div>
-                                <div class="item-profile">
-                                    <div class="profile-title">
-                                        <div class="img-wrapper"><img src="img\profile\1.jpg" alt="profile" class="img-responsive img-circle"></div>
-                                        <span>PsdBosS</span>
-                                    </div>
-                                    <div class="profile-rating">
-                                        <ul>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li>(<span> 05</span> )</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-item-grid">
-                            <div class="item-img">
-                                <img src="img\product\23.jpg" alt="product" class="img-responsive">
-                                <div class="trending-sign" data-tips="Trending"><i class="fa fa-bolt" aria-hidden="true"></i></div>
-                            </div>
-                            <div class="item-content">
-                                <div class="item-info">
-                                    <h3><a href="#">Team Component Pro</a></h3>
-                                    <span>Joomla Component</span>
-                                    <div class="price">$15</div>
-                                </div>
-                                <div class="item-profile">
-                                    <div class="profile-title">
-                                        <div class="img-wrapper"><img src="img\profile\1.jpg" alt="profile" class="img-responsive img-circle"></div>
-                                        <span>PsdBosS</span>
-                                    </div>
-                                    <div class="profile-rating">
-                                        <ul>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li>(<span> 05</span> )</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-item-grid">
-                            <div class="item-img">
-                                <img src="img\product\20.jpg" alt="product" class="img-responsive">
-                                <div class="trending-sign" data-tips="Trending"><i class="fa fa-bolt" aria-hidden="true"></i></div>
-                            </div>
-                            <div class="item-content">
-                                <div class="item-info">
-                                    <h3><a href="#">Team Component Pro</a></h3>
-                                    <span>Joomla Component</span>
-                                    <div class="price">$15</div>
-                                </div>
-                                <div class="item-profile">
-                                    <div class="profile-title">
-                                        <div class="img-wrapper"><img src="img\profile\1.jpg" alt="profile" class="img-responsive img-circle"></div>
-                                        <span>PsdBosS</span>
-                                    </div>
-                                    <div class="profile-rating">
-                                        <ul>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li>(<span> 05</span> )</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-item-grid">
-                            <div class="item-img">
-                                <img src="img\product\21.jpg" alt="product" class="img-responsive">
-                                <div class="trending-sign" data-tips="Trending"><i class="fa fa-bolt" aria-hidden="true"></i></div>
-                            </div>
-                            <div class="item-content">
-                                <div class="item-info">
-                                    <h3><a href="#">Team Component Pro</a></h3>
-                                    <span>Joomla Component</span>
-                                    <div class="price">$15</div>
-                                </div>
-                                <div class="item-profile">
-                                    <div class="profile-title">
-                                        <div class="img-wrapper"><img src="img\profile\1.jpg" alt="profile" class="img-responsive img-circle"></div>
-                                        <span>PsdBosS</span>
-                                    </div>
-                                    <div class="profile-rating">
-                                        <ul>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                            <li>(<span> 05</span> )</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -683,6 +567,7 @@
                                         <li><i class="fa fa-phone" aria-hidden="true"></i>+90 05322222222</li>
                                         <li><i class="fa fa-fax" aria-hidden="true"></i>+90-212-3102416</li>
                                         <li><i class="fa fa-envelope-o" aria-hidden="true"></i>firat_yzm17@outlook.com</li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -760,13 +645,17 @@
 
 </body>
 </html>
-<script type="text/javascript">
-    if (@isLoginError) {
-        $(document).ready(function () {
-            //sayfa açıldığında otomatik açılması için
-            $("#modalNesne").modal('show');         
-        });
-        
+    
+    @if (duyuruGoster == 1)
+    {
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                //sayfa açıldığında otomatik açılması için
+                $("#modalNesne").modal('show');
+            });
+            
+        </script>
+
     }
-     
-</script>
+

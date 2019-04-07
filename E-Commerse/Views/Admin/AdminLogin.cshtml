@@ -1,0 +1,88 @@
+﻿@using E_Commerse.ViewModels.Home;
+@model HomePageModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en" class="fullscreen-bg">
+<head>  
+    <title>Login </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link href="~/Content/AdminContent/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminContent/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminContent/vendor/linearicons/style.css" rel="stylesheet" />
+    <link href="~/Content/AdminContent/vendor/chartist/css/chartist-custom.css" rel="stylesheet" />
+
+    <!-- MAIN CSS -->
+    <link href="~/Content/AdminContent/css/main.css" rel="stylesheet" />
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link href="~/Content/AdminContent/css/demo.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="icon" type="image/png" sizes="96x96" href="~/Content/AdminContent/img/favicon.png">
+    <style>
+        .auth-box .right .overlay {
+            background: #8bc34a;
+        }
+    </style>
+</head>
+<body>
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <div class="vertical-align-wrap">
+            <div class="vertical-align-middle">
+                <div class="auth-box ">
+                    <div class="left">
+                        <div class="content">
+                            <div class="header">
+                                <div class="logo text-center"></div>
+                                <p class="lead">Login to your account</p>
+                            </div>
+                            @using (Html.BeginForm())
+                            {
+                                <div class="form-group">
+                                    <label for="signin-email" class="control-label sr-only">Email</label>
+                                    <input data-error="Email field is required" required=""  name="email" class="form-control" id="signin-email" value="" placeholder="ID">
+                                </div>
+                                <div class="form-group">
+                                    <label for="signin-password" class="control-label sr-only">Password</label>
+                                    <input data-error="Email field is required" required="" type="password" name="sifre" class="form-control" id="signin-password" value="" placeholder="Password">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
+                            }
+
+                            <div class="form-group">
+                                @if (ViewBag.result != null)
+                                {
+                                    <div style="margin-top:30px;" class="col-md-12">
+                                        <div class="alert alert-@ViewBag.status">
+                                            @ViewBag.result
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="right">
+                        <div class="overlay"></div>
+                        <div class="content text">
+                            <h1 style="text-align:center" class="heading">Market Place</h1>
+                            <p style="text-align:center">Admin Page</p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END WRAPPER -->
+</body>
+</html>

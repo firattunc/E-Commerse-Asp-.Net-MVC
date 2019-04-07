@@ -16,6 +16,7 @@ namespace E_Commerse.Models.Managers
         public DbSet<Kullanici> kullanici { get; set; }
         public DbSet<Favorites> favorites { get; set; }
         public DbSet<Admin> admin{ get; set; }
+        public DbSet<Istatistik> istatistik { get; set; }
         public DatabaseContext()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext,E_Commerse.Migrations.Configuration >());

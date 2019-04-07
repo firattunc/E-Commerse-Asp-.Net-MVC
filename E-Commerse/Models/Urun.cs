@@ -19,8 +19,10 @@ namespace E_Commerse.Models
         public string urunAciklama { get; set; }
         public int indirimYuzde { get; set; }
         public string imageUrl { get; set; }
+        public int sepetAdet { get; set; }
+        public int satisAdet { get; set; }
+        public int isCheap { get; set; }
 
-   
         public virtual Kategori kategoriID { get; set; }
         
     }
